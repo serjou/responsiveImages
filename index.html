@@ -1,6 +1,29 @@
 <!doctype html>
 <html>
-	<head><script blzsys="1" type="text/javascript">//<![CDATA[
+	<head>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js', {scope: './'}).then(function() {
+          // Registration was successful. Now, check to see whether the service worker is controlling the page.
+          if (navigator.serviceWorker.controller) {
+            // If .controller is set, then this page is being actively controlled by the service worker.
+            console.log('This pahe has been cached by the controlling service worker.');
+          } else {
+            // If .controller isn't set, then prompt the user to reload the page so that the service worker can take
+            // control. Until that happens, the service worker's fetch handler won't be used.
+            console.log('Please reload this page to allow the service worker to handle network operations.');
+          }
+        }).catch(function(error) {
+          // Something went wrong during registration. The service-worker.js file
+          // might be unavailable or contain a syntax error.
+          console.log(error);
+        });
+      } else {
+        console.log('Service workers are not supported in the current browser.');
+      }
+    </script>
+
+<script blzsys="1" type="text/javascript">//<![CDATA[
 function BlzDynamicImageLoader(
 		registeredPollAfterOnload, expectedImageSourceCheck,
 		responsiveScreenWidths, responsiveCell2GMaxWidth, responsiveCell3GMaxWidth, responsiveCell4GMaxWidth,
