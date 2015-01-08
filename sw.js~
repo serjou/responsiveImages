@@ -24,6 +24,7 @@ self.addEventListener('activate', function(event) {
       );
     })
   );
+  console.log('ServiceWorker activated');
 });
 
 self.addEventListener('fetch', function(event) {
