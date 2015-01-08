@@ -50,9 +50,10 @@ self.addEventListener('fetch', function(event) {
           return fetch(event.request.clone()).then(function(response) {
             console.log('  Response for %s from network is: %O', event.request.url, response);
 
-            if (response.status < 400 &&
-                response.headers.has('Content-Type') &&
-                response.headers.get('Content-Type').match(/^image\//i)) {
+            if (response.status < 400 // &&
+                //response.headers.has('Content-Type') &&
+                //response.headers.get('Content-Type').match(/^image\//i)
+		) {
               // This avoids caching responses that we know are errors (i.e. HTTP status code of 4xx or 5xx).
               // We also only want to cache responses that correspond to fonts,
               // i.e. have a Content-Type response header that starts with "font/".
